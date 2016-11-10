@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    style.
+        .game {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+        }
+        .game > div {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background-color: #ccc;
+            font-size: 300%;
+            font-family: sans-serif;
+            text-align: center;
+            line-height: 90px;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+    script(src="/javascripts/jquery-1.11.2.min.js")
+    script(src="/javascripts/15_game.js")
+    .game
+        - for(var i=0; i<15; ++i)
+            div(id=i)= i+1
