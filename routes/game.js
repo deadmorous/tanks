@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+// Describes player position
 function Position()
 {
     this.x = 0
