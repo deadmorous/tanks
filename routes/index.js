@@ -18,18 +18,10 @@ router
         next()
     })
 
-    .get('/', function(req, res, next) {
-      res.render('index', { name: req.session.name });
+    .get('/game', function(req, res, next) {
+      res.render('game', { name: req.session.name });
     })
-    .get('/messages', function(req, res, next) {
-        var first = +(req.query.first || 0)
-        res.send(JSON.stringify(messages.slice(first)))
-    })
-    .post('/message', function(req, res, next) {
-        var msg = req.session.name + ': ' + req.body.msg
-        messages.push(msg)
-        res.sendStatus(200)
-    })
+
 
     .get('/15', function(req, res, next) {
       res.render('15');
