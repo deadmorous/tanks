@@ -59,15 +59,19 @@ router
     })
     .use(function(req, res, next) {
         if (!sessionToPlayer.hasOwnProperty(req.sessionID))
-            return res.sendStatus(400)
+            res.send('you are not logged in. Go to the /enter')
+            //return res.sendStatus(400)
         req.session.player = sessionToPlayer[req.sessionID]
+        //render scene res.render(scene)
+        //initiate respawn
+        res.send('you are in the GAME')
         next()
     })
     .get('/set-motion-dir', function(req, res, next) {
         var speed = req.session.player.speed
         speed.x = +req.query.x
         speed.y = +req.query.y
-        // console.log('set-motion-dir: ok, name = ' + req.session.player.name)
+        console.log('set-motion-dir: ok, name = ' + req.session.player.name)
         res.sendStatus(200)
     })
     .get('/set-turret-rotation-dir', function(req, res, next) {
