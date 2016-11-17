@@ -57,6 +57,11 @@ router
             }
         res.sendStatus(200)
     })
+    .get('/', function(req, res, next) {
+        res.render('game', {
+            playing: sessionToPlayer.hasOwnProperty(req.sessionID)
+        })
+    })
     .use(function(req, res, next) {
         if (!sessionToPlayer.hasOwnProperty(req.sessionID))
             return res.sendStatus(400)

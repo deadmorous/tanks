@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  script(src='/javascripts/jquery-1.11.2.min.js')
+  if playing
+    p Now playing
+  else
+    input#enter(type='button' value='enter')
+    script.
+        $('#enter').click(function() {
+            $.get('/game/enter')
+                .done(location.reload.bind(location))
+        })
