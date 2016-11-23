@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  script(src='/javascripts/jquery-1.11.2.min.js')
+  if playing
+     p You are in game
+  else
+     p Not playing
+     input#enter(type='button', value='Refresh')
+     script.
+       $('#enter').click(function() {
+          $.get('/game/enter')
+             .done(function() {
+             location.reload()
+             })
+       })

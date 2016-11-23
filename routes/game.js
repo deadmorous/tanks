@@ -34,7 +34,7 @@ router
         res.send('hello from game')
     })
     .get('/scene', function(req, res, next) {
-        res.send(JSON.stringify(scene))
+        res.send(JSON.stringify(scene.players))
     })
     .get('/enter', function(req, res, next) {
         if (sessionToPlayer.hasOwnProperty(req.sessionID))
@@ -56,6 +56,11 @@ router
                 break
             }
         res.sendStatus(200)
+    })
+    .get('/', function(req, res, next) {
+        res.render('game', {
+            playing: sessionToPlayer.hasOwnProperty(req.sessionID)
+        })
     })
     .use(function(req, res, next) {
         if (!sessionToPlayer.hasOwnProperty(req.sessionID))
