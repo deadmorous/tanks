@@ -4,7 +4,7 @@ var router = express.Router();
 // Describes player position
 function Position()
 {
-    this.x = 0
+    this.x = 1
     this.y = 0
     this.angle = 0
 }
@@ -21,6 +21,7 @@ var scene = {
 }
 
 var sessionToPlayer = {}
+var h=0;
 
 function advanceScene()
 {
@@ -33,6 +34,7 @@ router
     .get('/hello', function(req, res, next) {
         res.send('hello from game')
     })
+
     .get('/scene', function(req, res, next) {
         res.send(JSON.stringify(scene))
     })
@@ -61,6 +63,7 @@ router
         res.render('game', {
             playing: sessionToPlayer.hasOwnProperty(req.sessionID)
         })
+
     })
     .use(function(req, res, next) {
         if (!sessionToPlayer.hasOwnProperty(req.sessionID))
@@ -68,6 +71,7 @@ router
         req.session.player = sessionToPlayer[req.sessionID]
         next()
     })
+
     .get('/set-motion-dir', function(req, res, next) {
         var speed = req.session.player.speed
         speed.x = +req.query.x
@@ -85,6 +89,13 @@ router
         req.session.player.shooting = true
         // console.log('shoot: ok, name = ' + req.session.player.name)
         res.sendStatus(200)
+    })
+    .get('/circle', function(req, res, next) {
+        h+=1
+        req.session.player.angle = (Math.PI/12.0)*h        
+        req.session.player.position.x =Math.cos((Math.PI/12.0)*h)
+        req.session.player.position.y =Math.sin((Math.PI/12.0)*h)
+        //res.json(JSON.stringify(scene))
     })
 
 module.exports = router;
