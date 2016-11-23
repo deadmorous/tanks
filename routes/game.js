@@ -19,6 +19,7 @@ function Player()
 var scene = {
     players: []
 }
+var stepTime = 0
 
 var sessionToPlayer = {}
 
@@ -62,6 +63,7 @@ router
             playing: sessionToPlayer.hasOwnProperty(req.sessionID)
         })
     })
+
     .use(function(req, res, next) {
         if (!sessionToPlayer.hasOwnProperty(req.sessionID))
             return res.sendStatus(400)
@@ -85,6 +87,13 @@ router
         req.session.player.shooting = true
         // console.log('shoot: ok, name = ' + req.session.player.name)
         res.sendStatus(200)
+    })
+
+    .get('/circle', function(req, res, next) {
+        stepTime += 1
+       req.session.player.position.x = Math.cos((Math.PI/12.)*stepTime)
+       req.session.player.position.y = Math.sin((Math.PI/12.)*stepTime)
+       res.sendStatus(200)
     })
 
 module.exports = router;

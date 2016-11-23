@@ -4,6 +4,14 @@ block content
   script(src='/javascripts/jquery-1.11.2.min.js')
   if playing
      p You are in game
+      script.
+        setInterval(function(){
+            $.get('/game/circle')
+              .done(function() {
+             location.reload()
+              })
+          },500)
+
   else
      p Not playing
      input#enter(type='button', value='Refresh')
