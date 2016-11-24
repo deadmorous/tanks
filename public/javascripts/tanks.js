@@ -36,5 +36,13 @@ $(document).ready(function() {
             })
     }
 
+    $(window)
+        .keydown(function(e) {
+            console.log('Key down: ' + e.key)
+        })
+        .keyup(function(e) {
+            console.log('Key up: ' + e.key)
+        })
+
     updateScene()
 })
