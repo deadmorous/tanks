@@ -3,14 +3,39 @@ extends layout
 block content
   script(src='/javascripts/jquery-1.11.2.min.js')
   if playing
-     p You are in game
-      script.
-        setInterval(function(){
-            $.get('/game/circle')
-              .done(function() {
-             location.reload()
-              })
-          },500)
+    style.
+        #game {
+            position: absolute;
+            top: 100px;
+            width: 300px;
+            height: 300px;
+            background-color: #ccc;
+        }
+        #err {
+            bottom: 10px;
+            height: 50px;
+            width: 100%;
+            position: absolute;
+            background-color: #fcc;
+        }
+        #dbg {
+            bottom: 70px;
+            height: 50px;
+            width: 100%;
+            position: absolute;
+            background-color: #cfc;
+        }
+        .player {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #ffc;
+        }
+    script(src='/javascripts/tanks.js')
+    p You are in game
+    #game
+    #err
+    #dbg
 
   else
      p Not playing

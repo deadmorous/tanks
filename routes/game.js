@@ -91,8 +91,9 @@ router
 
     .get('/circle', function(req, res, next) {
         stepTime += 1
-       req.session.player.position.x = Math.cos((Math.PI/12.)*stepTime)
-       req.session.player.position.y = Math.sin((Math.PI/12.)*stepTime)
+        var d = 100
+       req.session.player.position.x = Math.cos((Math.PI/d)*stepTime)
+       req.session.player.position.y = Math.sin((Math.PI/d)*stepTime)
        res.sendStatus(200)
     })
 
