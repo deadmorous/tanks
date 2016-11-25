@@ -89,6 +89,9 @@ router
         res.sendStatus(200)
     })
 
+    .get('/move-right', function(req, res, next) {
+        res.sendStatus(200)
+    })
     .get('/circle', function(req, res, next) {
         stepTime += 1
         var d = 100

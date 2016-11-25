@@ -1,11 +1,11 @@
 $(document).ready(function() {
-    setInterval(function(){
-        $.get('/game/circle')
-          .done(function() {
-         // location.reload()
-          })
-      },100)
+var dt=100
+var dx=0
 
+var pos = {
+                left: 100,
+                top: 100
+            }
     function makeScene(players)
     {
         var g = $('#game')
@@ -15,10 +15,10 @@ $(document).ready(function() {
         var psize = { width: 50, height: 50 }
         for (var i in players) {
             var player = players[i]
-            var pos = {
-                left: /*gpos.left + */0.5*(1+player.position.x)*(gsize.width - psize.width),
-                top: /*gpos.top + */0.5*(1+player.position.y)*(gsize.height - psize.height)
-            }
+                    
+                
+
+
             // console.log(pos)
             $('<div>')
               .addClass('player')
@@ -27,22 +27,30 @@ $(document).ready(function() {
         }
     }
 
+
+
     function updateScene() {
         $.get('/game/scene')
             .done(function(data) {
                 $('#dbg').text(data)
                 makeScene(JSON.parse(data))
-                setTimeout(updateScene, 100)
+                setTimeout(updateScene, dt)
             })
     }
 
-    $(window)
-        .keydown(function(e) {
-            console.log('Key down: ' + e.key)
-        })
-        .keyup(function(e) {
-            console.log('Key up: ' + e.key)
-        })
+        $(window)
+            .keydown(function(e) {
+                if (e.key == "d"){
+                    $.get('/game/move-right')
+                        .done(function(){
+                            console.log('move-rigth done')
+                        })
+                }
+            })
+
+
+
+
 
     updateScene()
 })
