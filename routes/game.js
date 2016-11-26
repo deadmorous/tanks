@@ -90,8 +90,14 @@ router
     })
 
     .get('/move-right', function(req, res, next) {
-        console.log(JSON.stringify(sessionToPlayer[req.sessionID].name))
-        console.log(req.sessionID)
+        //console.log("from session"+sessionToPlayer[req.sessionID].name)
+        //console.log("from scene"+scene.players[0].name)
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].position.x+=1
+            }
+        }
+        console.log("moved rigth on 1 px")
         res.sendStatus(200)
     })
     .get('/circle', function(req, res, next) {

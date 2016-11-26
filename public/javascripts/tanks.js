@@ -2,10 +2,7 @@ $(document).ready(function() {
 var dt=100
 var dx=0
 
-var pos = {
-                left: 100,
-                top: 100
-            }
+
     function makeScene(players)
     {
         var g = $('#game')
@@ -14,12 +11,12 @@ var pos = {
         var gsize = { width: g.width(), height: g.height() }
         var psize = { width: 50, height: 50 }
         for (var i in players) {
-            var player = players[i]
-                    
-                
-
-
-            // console.log(pos)
+            var player = players[i] 
+            var pos = {
+                left: player.position.x,
+                top: 100
+            }              
+           // console.log(pos)
             $('<div>')
               .addClass('player')
               .offset(pos)
