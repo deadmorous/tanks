@@ -14,7 +14,7 @@ var dx=0
             var player = players[i] 
             var pos = {
                 left: player.position.x,
-                top: 100
+                top: player.position.y
             }              
            // console.log(pos)
             $('<div>')
@@ -41,6 +41,24 @@ var dx=0
                     $.get('/game/move-right')
                         .done(function(){
                             console.log('move-rigth done')
+                        })
+                }
+                if (e.key == "w"){
+                    $.get('/game/move-up')
+                        .done(function(){
+                            console.log('move-up done')
+                        })
+                }
+                if (e.key == "s"){
+                    $.get('/game/move-down')
+                        .done(function(){
+                            console.log('move-down done')
+                        })
+                }
+                if (e.key == "a"){
+                    $.get('/game/move-left')
+                        .done(function(){
+                            console.log('move-left done')
                         })
                 }
             })
