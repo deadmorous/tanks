@@ -1,5 +1,5 @@
 $(document).ready(function() {
-var dt=100
+var dt=50
 var dx=0
 
 
