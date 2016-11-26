@@ -28,7 +28,7 @@ function advanceScene()
     console.log('TODO: advanceScene()')
 }
 
-setInterval(advanceScene, 500)
+//setInterval(advanceScene, 500)
 
 router
     .get('/hello', function(req, res, next) {
@@ -90,6 +90,8 @@ router
     })
 
     .get('/move-right', function(req, res, next) {
+        console.log(JSON.stringify(sessionToPlayer[req.sessionID].name))
+        console.log(req.sessionID)
         res.sendStatus(200)
     })
     .get('/circle', function(req, res, next) {

@@ -10,7 +10,7 @@ router
     })
     .post('/login', function(req, res, next) {
         req.session.name = req.body.name
-        res.redirect('/')
+        res.redirect('/game')
     })
     .use(function(req, res, next) {
         if (!req.session.name)
