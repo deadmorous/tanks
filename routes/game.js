@@ -90,10 +90,40 @@ router
     })
 
     .get('/move-right', function(req, res, next) {
-        console.log(JSON.stringify(sessionToPlayer[req.sessionID].name))
-        console.log(req.sessionID)
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].position.x += 2
+            }
+        }
         res.sendStatus(200)
     })
+    .get('/move-left', function(req, res, next) {
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].position.x -= 2
+            }
+        }
+        res.sendStatus(200)
+    })
+
+    .get('/move-top', function(req, res, next) {
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].position.y -= 2
+            }
+        }
+        res.sendStatus(200)
+    })
+
+    .get('/move-down', function(req, res, next) {
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].position.y += 2
+            }
+        }
+        res.sendStatus(200)
+    })
+
     .get('/circle', function(req, res, next) {
         stepTime += 1
         var d = 100
