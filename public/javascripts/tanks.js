@@ -38,8 +38,7 @@ var pos_tower = {
               .addClass('tower')
               .offset(pos_tower)
               .appendTo(g)
-            $("#tow")
-                .rotate(player.position.angle)
+              .rotate({angle: player.position.angle})
         }
     }
 
