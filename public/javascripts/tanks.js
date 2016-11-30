@@ -1,5 +1,5 @@
 $(document).ready(function() {
-var dt=100
+var dt=50
 var dx=0
 
 var pos = {
@@ -56,6 +56,7 @@ var pos_tower = {
 
         $(window)
             .keydown(function(e) {
+                console.log(e.key)
                 if (e.key == "d"){
                     $.get('/game/move-right')
                         .done(function(){
@@ -69,7 +70,7 @@ var pos_tower = {
                         })
                 }
                 if (e.key == "w"){
-                    $.get('/game/move-top')
+                    $.get('/game/move-up')
                         .done(function(){
                             console.log('move-top done')
                         })
@@ -79,12 +80,23 @@ var pos_tower = {
                         .done(function(){
                             console.log('move-down done')
                         })
-                }
+                }                 
             })
-
-
-
-
-
+        $(window)
+            .keydown(function(e) {
+                console.log(e.key)
+                if (e.key == "ArrowLeft"){
+                    $.get('/game/rotate-tower-left')
+                        .done(function(){
+                            console.log('rotate-left-done')
+                        })
+                }
+                if (e.key == "ArrowRight"){
+                    $.get('/game/rotate-tower-right')
+                        .done(function(){
+                            console.log('rotate-right-done')
+                        })
+                }                 
+            })
     updateScene()
 })

@@ -106,7 +106,7 @@ router
         res.sendStatus(200)
     })
 
-    .get('/move-top', function(req, res, next) {
+    .get('/move-up', function(req, res, next) {
         for (var i in scene.players) {
             if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
                 scene.players[i].position.y -= 2
@@ -119,6 +119,23 @@ router
         for (var i in scene.players) {
             if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
                 scene.players[i].position.y += 2
+            }
+        }
+        res.sendStatus(200)
+    })
+
+    .get('/rotate-tower-right',function(req, res, next){
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].position.angle+=1
+            }
+        }
+        res.sendStatus(200)
+    })
+    .get('/rotate-tower-left',function(req, res, next){
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].position.angle-=1
             }
         }
         res.sendStatus(200)
