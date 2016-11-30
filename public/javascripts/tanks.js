@@ -37,6 +37,7 @@ var dx=0
 
         $(window)
             .keydown(function(e) {
+                console.log(e.key)
                 if (e.key == "d"){
                     $.get('/game/move-right')
                         .done(function(){
@@ -61,6 +62,19 @@ var dx=0
                             console.log('move-left done')
                         })
                 }
+                if (e.key == "ArrowLeft"){
+                    $.get('/game/rotate-tower-left')
+                        .done(function(){
+                            console.log('rotate-left-done')
+                        })
+                }
+                if (e.key == "ArrowRight"){
+                    $.get('/game/rotate-tower-right')
+                        .done(function(){
+                            console.log('rotate-right-done')
+                        })
+                }                 
+              
             })
 
 

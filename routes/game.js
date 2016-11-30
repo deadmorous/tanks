@@ -97,39 +97,47 @@ router
                 scene.players[i].position.x+=1
             }
         }
-        console.log("moved rigth on 1 px")
         res.sendStatus(200)
     })
     .get('/move-left', function(req, res, next) {
-
         for (var i in scene.players) {
             if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
                 scene.players[i].position.x-=1
             }
         }
-        console.log("moved left on 1 px")
         res.sendStatus(200)
     })
     .get('/move-up', function(req, res, next) {
-
         for (var i in scene.players) {
             if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
                 scene.players[i].position.y-=1
             }
         }
-        console.log("moved up on 1 px")
         res.sendStatus(200)
     })
     .get('/move-down', function(req, res, next) {
-
         for (var i in scene.players) {
             if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
                 scene.players[i].position.y+=1
             }
         }
-        console.log("moved up on 1 px")
         res.sendStatus(200)
     })
+    .get('/game/rotate-tower-right'){
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].angle-=1
+            }
+        }
+        res.sendStatus(200)
+    }
+    .get('/game/rotate-tower-left'){
+        for (var i in scene.players) {
+            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+                scene.players[i].angle+=1
+            }
+        }
+    }
     .get('/circle', function(req, res, next) {
         stepTime += 1
         var d = 100
