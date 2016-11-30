@@ -1,6 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
+router
+    .get('/', function(req, res, next) {
+        res.render('');
+    })
+    .post('/', function(req, res, next) {
+        req.session.name = req.body.name
+        res.redirect('/game/enter')
+    })
+    .use(function(req, res, next) {
+        if (!req.session.name)
+            return res.redirect('/')
+        next()
+    })
+
 // Describes player position
 function Position()
 {

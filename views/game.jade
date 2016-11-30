@@ -4,7 +4,10 @@ block content
   script(src='/javascripts/jquery-1.11.2.min.js')
   script(src='/javascripts/jqueryrotate.2.1.js')
   script(src='/javascripts/transform2d.js')
-  
+  form(action="/game/enter" method='post')
+   label(for='name') Enter your name
+   input(type='text', name='name')
+   input(type='submit', value='Enter')
 
   if playing
     style.
@@ -54,11 +57,3 @@ block content
 
   else
      p Not playing
-     input#enter(type='button', value='Refresh')
-     script.
-       $('#enter').click(function() {
-          $.get('/game/enter')
-             .done(function() {
-             location.reload()
-             })
-       })
