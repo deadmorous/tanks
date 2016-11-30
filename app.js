@@ -31,8 +31,8 @@ app.use(session({
 }))
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/game', gameRoutes);
+//app.use('/', routes);
+app.use('/', gameRoutes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
