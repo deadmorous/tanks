@@ -8,12 +8,18 @@ function Position()
     this.y = 0
     this.angle = 0
 }
+Position.prototype.add = function(speed, factor) {
+    this.x += speed.x * factor
+    this.y += speed.y * factor
+    this.angle += speed.angle * factor
+}
 
 function Player()
 {
     this.position = new Position
     this.speed = new Position
     this.shooting = false
+    this.status = 'alive'
 }
 
 var scene = {
@@ -25,10 +31,13 @@ var sessionToPlayer = {}
 
 function advanceScene()
 {
-    console.log('TODO: advanceScene()')
+    for (var i in scene.players) {
+        var player = scene.players[i]
+        player.position.add(player.speed, 2)
+    }
 }
 
-//setInterval(advanceScene, 500)
+setInterval(advanceScene, 40)
 
 router
     .get('/hello', function(req, res, next) {
@@ -72,8 +81,10 @@ router
     })
     .get('/set-motion-dir', function(req, res, next) {
         var speed = req.session.player.speed
-        speed.x = +req.query.x
-        speed.y = +req.query.y
+        if ('x' in req.query)
+            speed.x = +req.query.x
+        if ('y' in req.query)
+            speed.y = +req.query.y
         // console.log('set-motion-dir: ok, name = ' + req.session.player.name)
         res.sendStatus(200)
     })

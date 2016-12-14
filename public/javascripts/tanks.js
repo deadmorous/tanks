@@ -31,6 +31,7 @@ var pos_tower = {
             }
             $('<div>')
               .addClass('player')
+              .addClass(player.status)
               .offset(pos)
               .appendTo(g)
 
@@ -53,7 +54,65 @@ var pos_tower = {
             })
     }
 
+    (function() {
+        var down = {}
+        function processMotionKey(e, dir) {
+            var path, q
+            switch (e.key) {
+            case 'a':
+                path = '/set-motion-dir'
+                q = { x: -dir }
+                break
+            case 'd':
+                path = '/set-motion-dir'
+                q = { x: dir }
+                break
+            case 'w':
+                path = '/set-motion-dir'
+                q = { y: -dir }
+                break
+            case 's':
+                path = '/set-motion-dir'
+                q = { y: dir }
+                break
+            case 'ArrowLeft':
+                path = '/set-turret-rotation-dir'
+                q = { angle: -dir }
+                break
+            case 'ArrowRight':
+                path = '/set-turret-rotation-dir'
+                q = { angle: dir }
+                break
+            }
+            if (path) {
+                e.preventDefault()
+                $.get('/game' + path, q).done(function() {
+                    console.log('Moved: ' + path + JSON.stringify(q))
+                })
+            }
+        }
         $(window)
+            .keydown(function(e) {
+                if (down[e.keyCode]) {
+                    e.preventDefault()
+                    return
+                }
+                down[e.keyCode] = true
+                console.log(e)
+                if (e.key == ' ')
+                    $.get('/shoot')
+                        .done(console.log.bind(console, 'shot'))
+                else
+                    processMotionKey(e, 1)
+            })
+            .keyup(function(e) {
+                delete down[e.keyCode]
+                console.log(e)
+                processMotionKey(e, 0)
+            })
+    })()
+
+        /*$(window)
             .keydown(function(e) {
                 console.log(e.key)
                 if (e.key == "d"){
@@ -97,5 +156,6 @@ var pos_tower = {
                         })
                 }                 
             })
+            */
     updateScene()
 })
