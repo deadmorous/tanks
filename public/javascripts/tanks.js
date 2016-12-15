@@ -46,7 +46,7 @@ var pos_tower = {
 
 
     function updateScene() {
-        $.get('/game/scene')
+        $.get('/scene')
             .done(function(data) {
                 $('#dbg').text(data)
                 makeScene(JSON.parse(data))
@@ -86,7 +86,7 @@ var pos_tower = {
             }
             if (path) {
                 e.preventDefault()
-                $.get('/game' + path, q).done(function() {
+                $.get(path, q).done(function() {
                     console.log('Moved: ' + path + JSON.stringify(q))
                 })
             }
