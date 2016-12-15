@@ -1,19 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router
-    .get('/', function(req, res, next) {
-        res.render('');
-    })
-    .post('/', function(req, res, next) {
-        req.session.name = req.body.name
-        res.redirect('/game/enter')
-    })
-    .use(function(req, res, next) {
-        if (!req.session.name)
-            return res.redirect('/')
-        next()
-    })
+
+
 
 // Describes player position
 function Position()
@@ -54,21 +43,29 @@ function advanceScene()
 setInterval(advanceScene, 40)
 
 router
-    .get('/hello', function(req, res, next) {
+    .get('/login', function(req, res, next) {
+        res.render('login');
+    })
+    .post('/login', function(req, res, next) {
+        req.session.name = req.body.name
+		var player = new Player
+        player.name = req.session.name
+        scene.players.push(player)
+        sessionToPlayer[req.sessionID] = player
+        res.redirect('/')
+    })
+    .use(function(req, res, next) {
+        if (!req.session.name)
+            return res.redirect('/login')
+        next()
+    })
+	.get('/hello', function(req, res, next) {
         res.send('hello from game')
     })
     .get('/scene', function(req, res, next) {
         res.send(JSON.stringify(scene.players))
     })
-    .get('/enter', function(req, res, next) {
-        if (sessionToPlayer.hasOwnProperty(req.sessionID))
-            return res.sendStatus(400)
-        var player = new Player
-        player.name = req.session.name
-        scene.players.push(player)
-        sessionToPlayer[req.sessionID] = player
-        res.sendStatus(200)
-    })
+    
     .get('/leave', function(req, res, next) {
         if (!sessionToPlayer.hasOwnProperty(req.sessionID))
             return res.sendStatus(400)
