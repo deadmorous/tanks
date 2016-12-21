@@ -1,5 +1,5 @@
 $(document).ready(function() {
-var dt=50
+var dt=40
 var dx=0
 
 var pos = {
@@ -26,8 +26,10 @@ var pos_tower = {
                 top:  player.position.y
             }
             pos_tower = {
-                left: player.position.x+25-20*(1-Math.cos(Math.PI*player.position.angle/180)),
-                top:  player.position.y+20+20*Math.sin(Math.PI*player.position.angle/180)
+                //left: player.position.x+25-20*(1-Math.cos(Math.PI*player.position.angle/180)),
+                //top:  player.position.y+20+20*Math.sin(Math.PI*player.position.angle/180)
+                left: player.position.x-20*(1-Math.cos(Math.PI*player.position.angle/180)),
+                top:  player.position.y+20*Math.sin(Math.PI*player.position.angle/180)
             }
             $('<div>')
               .addClass('player')
@@ -107,7 +109,7 @@ var pos_tower = {
             })
             .keyup(function(e) {
                 delete down[e.keyCode]
-                console.log(e)
+                //console.log(e)
                 processMotionKey(e, 0)
             })
     })()
