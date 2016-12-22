@@ -23,26 +23,81 @@ function Player()
     this.speed = new Position
     this.shooting = false
     this.status = 'alive'//or dead
+    this.score = 0
+    this.timeout = -1
 }
 
-var scene = {
-    players: []
+function Scene() {
+    this.players = []
 }
+Scene.prototype.processTimeouts = function() {
+    for (var i in this.players) {
+        var player = this.players[i]
+        if (player.timeout === 0) {
+            switch (player.status) {
+            case 'dead':
+                player.status = 'respawning'
+                player.timeout = 25
+                break
+            case 'respawning':
+                player.status = 'alive'
+                player.timeout = -1
+                break
+            }
+        }
+        else if (player.timeout > 0)
+            --player.timeout
+    }
+}
+Scene.prototype.move = function() {
+    for (var i in this.players) {
+        var player = this.players[i]
+        player.position.add(player.speed, 2)
+    }
+}
+Scene.prototype.processShoots() {
+    var killedTanks = []
+    for (var i in this.players) {
+        var player = this.players[i]
+        var killedTank
+        if(player.shooting && player.status === 'alive') {
+            maybe
+                killedTank = this.players[jNearest]
+        }
+        if(killedTank)
+        {
+            ++player.score
+            killedTanks.push(killedTank)
+        }
+        player.shooting = false
+    }
+
+    for(i in killedTanks)
+    {
+        killedTank = killedTanks[i]
+        if(killedTank.status === 'alive')
+            continue
+        killedTank.status = 'dead'
+        killedTank.timeout = 50
+        --killedTank.score
+    }
+}
+
+Scene.prototype.advance = function()
+{
+    this.processTimeouts()
+    this.move()
+    this.processShoots()
+}
+
+
+var scene = new Scene
+
 var stepTime = 0
 
 var sessionToPlayer = {}
 
-function advanceScene()
-{
-    for (var i in scene.players) {
-        var player = scene.players[i]
-        player.position.add(player.speed, 2)
-    }
-}
-
-
-
-setInterval(advanceScene, 40)
+setInterval(scene.advance.bind(scene), 40)
 
 router
     .get('/login', function(req, res, next) {
@@ -108,7 +163,8 @@ router
         res.sendStatus(200)
     })
     .get('/shoot', function(req, res, next) {
-        var ind_killer;
+        req.session.player.shooting = true
+        /*var ind_killer;
         for (var i in scene.players) {
             if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
                 ind_killer=i
@@ -145,7 +201,7 @@ router
             console.log('you' + req.session.player.name+"killed "+scene.players[ind_killed].name)
         }
             
-        
+        */
         res.sendStatus(200)
     })
 
