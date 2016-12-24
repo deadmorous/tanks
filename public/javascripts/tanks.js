@@ -26,16 +26,17 @@ var pos_tower = {
                 top:  player.position.y
             }
             pos_tower = {
-                //left: player.position.x+25-20*(1-Math.cos(Math.PI*player.position.angle/180)),
-                //top:  player.position.y+20+20*Math.sin(Math.PI*player.position.angle/180)
-                left: player.position.x-20*(1-Math.cos(Math.PI*player.position.angle/180)),
-                top:  player.position.y+20*Math.sin(Math.PI*player.position.angle/180)
+                left: player.position.x+25-20*(1-Math.cos(Math.PI*player.position.angle/180)),
+                top:  player.position.y+20+20*Math.sin(Math.PI*player.position.angle/180)
+                //left: player.position.x-20*(1-Math.cos(Math.PI*player.position.angle/180)),
+                //top:  player.position.y+20*Math.sin(Math.PI*player.position.angle/180)
             }
             $('<div>')
               .addClass('player')
               .addClass(player.status)
               .offset(pos)
               .appendTo(g)
+              .html(player.name)
 
             $('<div id=tow>')
               .addClass('tower')

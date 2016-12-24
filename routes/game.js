@@ -37,7 +37,9 @@ Scene.prototype.processTimeouts = function() {
             switch (player.status) {
             case 'dead':
                 player.status = 'respawning'
-                player.timeout = 25
+                player.position.x=Math.random()*(1050)
+                player.position.y=Math.random()*(450)
+                player.timeout = 50
                 break
             case 'respawning':
                 player.status = 'alive'
@@ -52,17 +54,56 @@ Scene.prototype.processTimeouts = function() {
 Scene.prototype.move = function() {
     for (var i in this.players) {
         var player = this.players[i]
-        player.position.add(player.speed, 2)
+        if ((player.position.x <1051) && (player.position.x > -1) && (player.position.y <451) && (player.position.y > -1)){
+            player.position.add(player.speed, 3)
+        }
+        else {
+            if ((player.position.x > 1050) && (player.speed.x < 0)){
+                player.position.add(player.speed, 3)
+            }
+            if (player.position.x < 0 && (player.speed.x > 0)){
+                player.position.add(player.speed, 3)
+            }
+            if ((player.position.y > 45) && (player.speed.y < 0)){
+                player.position.add(player.speed, 3)
+            }
+            if ((player.position.y < 0) && (player.speed.y > 0)){
+                player.position.add(player.speed, 3)
+            }
+
+        }
+            
     }
 }
-Scene.prototype.processShoots() {
+Scene.prototype.processShoots = function() {
     var killedTanks = []
-    for (var i in this.players) {
+    for (var i in this.players) {//i=1
         var player = this.players[i]
         var killedTank
         if(player.shooting && player.status === 'alive') {
-            maybe
-                killedTank = this.players[jNearest]
+            for (var j in this.players) {//j=0
+                 if (i==j) {
+                     l=0;
+                     h=0;
+                }
+                 else {
+                     var x_killer=player.position.x
+                     var y_killer=player.position.y
+                     var angle_killer=player.position.angle*Math.PI/180
+                     var l=(this.players[j].position.x-x_killer)*Math.cos(angle_killer)+(this.players[j].position.y-y_killer)*Math.sin(angle_killer)
+                     var h=-(this.players[j].position.x-x_killer)*Math.sin(angle_killer)+(this.players[j].position.y-y_killer)*Math.cos(angle_killer)
+                     if (l > 0) {
+                         if (Math.abs(h) < 25) //-----------------------set r--------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                         {
+                             //if (l > min_l) TODO-----------------
+                                 var jNearest=j
+                         }
+                     }
+                //    var jNearest=j//jNearest=j=1
+                    killedTank = this.players[jNearest]
+                }
+                
+            }
         }
         if(killedTank)
         {
@@ -70,16 +111,21 @@ Scene.prototype.processShoots() {
             killedTanks.push(killedTank)
         }
         player.shooting = false
+        killedTank=undefined
+
     }
 
     for(i in killedTanks)
     {
         killedTank = killedTanks[i]
-        if(killedTank.status === 'alive')
-            continue
-        killedTank.status = 'dead'
-        killedTank.timeout = 50
-        --killedTank.score
+        if(killedTank.status === 'alive') {
+            //    continue
+            killedTank.status = 'dead'
+            killedTank.timeout = 50
+            --killedTank.score
+        }
+        
+        
     }
 }
 
