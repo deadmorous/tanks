@@ -82,14 +82,13 @@ Scene.prototype.move = function() {
 }
 Scene.prototype.processShoots = function() {
     var killedTanks = []
-    for (var i in this.players) {//i=1
+    for (var i in this.players) {
         var player = this.players[i]
         var killedTank
         if(player.shooting && player.status === 'alive' ) {
             player.status='cant_shoot'
             player.timeout=20
-            //&& player.timeout < 0
-            for (var j in this.players) {//j=0
+            for (var j in this.players) {
                  if (i==j) {
                      l=0;
                      h=0;
@@ -107,7 +106,6 @@ Scene.prototype.processShoots = function() {
                                  var jNearest=j
                          }
                      }
-                //    var jNearest=j//jNearest=j=1
                     killedTank = this.players[jNearest]
                 }
                 
@@ -220,44 +218,6 @@ router
     })
     .get('/shoot', function(req, res, next) {
         req.session.player.shooting = true
-        /*var ind_killer;
-        for (var i in scene.players) {
-            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
-                ind_killer=i
-            }
-        }
-        var x_killer=scene.players[ind_killer].position.x
-        var y_killer=scene.players[ind_killer].position.y
-        var angle_killer=scene.players[ind_killer].position.angle*Math.PI/180
-        var arr_l = []
-        var arr_h = []
-        var ind_killed=-1
-        var min_l=0
-
-        for (var i in scene.players) {
-            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
-                //arr_l[i]=0
-                //arr_h[i]=0
-            }
-            else {
-                arr_l[i]=(scene.players[i].position.y-y_killer)*Math.cos(angle_killer)+(scene.players[i].position.x-x_killer)*Math.sin(angle_killer)
-                arr_h[i]=-(scene.players[i].position.y-y_killer)*Math.sin(angle_killer)+(scene.players[i].position.x-x_killer)*Math.cos(angle_killer)
-                if (arr_l[i] > 0) {
-                    if (arr_h[i] < 25) //-----------------------set r--------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    {
-                        //if (arr_l[i] > min_l)
-                            ind_killed=i
-                    }
-                }
-            }
-        }
-        if (ind_killed >= 0)
-        {
-            scene.players[ind_killed].status = 'dead'
-            console.log('you' + req.session.player.name+"killed "+scene.players[ind_killed].name)
-        }
-            
-        */
         res.sendStatus(200)
     })
 
