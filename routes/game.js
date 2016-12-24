@@ -52,23 +52,24 @@ Scene.prototype.processTimeouts = function() {
     }
 }
 Scene.prototype.move = function() {
+    var factor = 2
     for (var i in this.players) {
         var player = this.players[i]
         if ((player.position.x <1051) && (player.position.x > -1) && (player.position.y <451) && (player.position.y > -1)){
-            player.position.add(player.speed, 3)
+            player.position.add(player.speed, factor)
         }
         else {
             if ((player.position.x > 1050) && (player.speed.x < 0)){
-                player.position.add(player.speed, 3)
+                player.position.add(player.speed, factor)
             }
             if (player.position.x < 0 && (player.speed.x > 0)){
-                player.position.add(player.speed, 3)
+                player.position.add(player.speed, factor)
             }
             if ((player.position.y > 45) && (player.speed.y < 0)){
-                player.position.add(player.speed, 3)
+                player.position.add(player.speed, factor)
             }
             if ((player.position.y < 0) && (player.speed.y > 0)){
-                player.position.add(player.speed, 3)
+                player.position.add(player.speed, factor)
             }
 
         }
