@@ -85,9 +85,10 @@ Scene.prototype.processShoots = function() {
     for (var i in this.players) {//i=1
         var player = this.players[i]
         var killedTank
-        if(player.shooting && player.status === 'alive' && player.timeout < 0) {
+        if(player.shooting && player.status === 'alive' ) {
             player.status='cant_shoot'
             player.timeout=20
+            //&& player.timeout < 0
             for (var j in this.players) {//j=0
                  if (i==j) {
                      l=0;
@@ -127,7 +128,7 @@ Scene.prototype.processShoots = function() {
     for(i in killedTanks)
     {
         killedTank = killedTanks[i]
-        if(killedTank.status === 'alive') {
+        if(killedTank.status === 'alive' || killedTank.status === 'cant_shoot') {
             //    continue
             killedTank.status = 'dead'
             killedTank.timeout = 50
