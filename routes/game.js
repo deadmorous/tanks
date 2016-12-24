@@ -45,6 +45,10 @@ Scene.prototype.processTimeouts = function() {
                 player.status = 'alive'
                 player.timeout = -1
                 break
+            case 'cant_shoot':
+                player.status = 'alive'
+                player.timeout = -1
+                break
             }
         }
         else if (player.timeout > 0)
@@ -81,7 +85,9 @@ Scene.prototype.processShoots = function() {
     for (var i in this.players) {//i=1
         var player = this.players[i]
         var killedTank
-        if(player.shooting && player.status === 'alive') {
+        if(player.shooting && player.status === 'alive' && player.timeout < 0) {
+            player.status='cant_shoot'
+            player.timeout=20
             for (var j in this.players) {//j=0
                  if (i==j) {
                      l=0;
@@ -105,10 +111,12 @@ Scene.prototype.processShoots = function() {
                 }
                 
             }
+            
         }
         if(killedTank)
         {
             ++player.score
+
             killedTanks.push(killedTank)
         }
         player.shooting = false
