@@ -11,10 +11,10 @@
 }
 .respawning {
     background-color: #aaa;
-        }
+}
 .cant_shoot {
     background-color: #f75;
-        }
+}
 .tower {
     position: absolute;
     width: 40px;
