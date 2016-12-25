@@ -4,7 +4,8 @@ block content
   script(src='/javascripts/jquery-1.11.2.min.js')
   script(src='/javascripts/jqueryrotate.2.1.js')
   script(src='/javascripts/transform2d.js')
-  
+  link(rel='stylesheet', href='/stylesheets/tanks.css')
+
 
   if playing
     style.
@@ -29,29 +30,7 @@ block content
             position: absolute;
             background-color: #cfc;
         }
-        .player {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-        }
-        .alive {
-            background-color: #ffc;
-        }
-        .dead {
-            background-color: #333;
-        }
-        .respawning {
-            background-color: #aaa;
-        }
-        .cant_shoot {
-            background-color: #f75;
-        }
-        .tower {
-            position: absolute;
-            width: 40px;
-            height: 10px;
-            background-color: #0f0;
-        }
+
     script(src='/javascripts/tanks.js')
     p You are in game
     #game
