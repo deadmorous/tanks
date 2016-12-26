@@ -221,40 +221,40 @@ router
         res.sendStatus(200)
     })
 
-    .get('/move-right', function(req, res, next) {
-        for (var i in scene.players) {
-            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
-                scene.players[i].position.x += 2
-            }
-        }
-        res.sendStatus(200)
-    })
-    .get('/move-left', function(req, res, next) {
-        for (var i in scene.players) {
-            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
-                scene.players[i].position.x -= 2
-            }
-        }
-        res.sendStatus(200)
-    })
+    // .get('/move-right', function(req, res, next) {
+    //     for (var i in scene.players) {
+    //         if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+    //             scene.players[i].position.x += 2
+    //         }
+    //     }
+    //     res.sendStatus(200)
+    // })
+    // .get('/move-left', function(req, res, next) {
+    //     for (var i in scene.players) {
+    //         if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+    //             scene.players[i].position.x -= 2
+    //         }
+    //     }
+    //     res.sendStatus(200)
+    // })
 
-    .get('/move-up', function(req, res, next) {
-        for (var i in scene.players) {
-            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
-                scene.players[i].position.y -= 2
-            }
-        }
-        res.sendStatus(200)
-    })
+    // .get('/move-up', function(req, res, next) {
+    //     for (var i in scene.players) {
+    //         if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+    //             scene.players[i].position.y -= 2
+    //         }
+    //     }
+    //     res.sendStatus(200)
+    // })
 
-    .get('/move-down', function(req, res, next) {
-        for (var i in scene.players) {
-            if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
-                scene.players[i].position.y += 2
-            }
-        }
-        res.sendStatus(200)
-    })
+    // .get('/move-down', function(req, res, next) {
+    //     for (var i in scene.players) {
+    //         if (sessionToPlayer[req.sessionID].name == scene.players[i].name){
+    //             scene.players[i].position.y += 2
+    //         }
+    //     }
+    //     res.sendStatus(200)
+    // })
 
     .get('/rotate-tower-right',function(req, res, next){
         for (var i in scene.players) {
