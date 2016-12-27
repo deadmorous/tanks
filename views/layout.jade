@@ -3,5 +3,17 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/bootstrap.css')
+
+
   body
     block content
+    div.modal.fade(id="myModal", role="dialog")
+        div.modal-dialog
+            div.modal-content
+                .modal-header
+                    button(type="button", class="close", data-dismiss="modal") x
+                    h3 Modal Header
+                .modal-body
+                    p One fine body...
+                .modal-footer
