@@ -31,7 +31,14 @@ app.use(session({
 }))
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 //app.use('/', routes);
+app.get('/tst', function(req, res, next) {
+    res.render('tst')
+    })
+app.get('/err', function(req, res, next) {
+    res.render('err_test')
+    })
 app.use('/', gameRoutes);
 app.use('/users', users);
 

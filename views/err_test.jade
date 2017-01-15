@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  script(src='/javascripts/jquery-1.11.2.min.js')
+  script.
+    var newErrorMessage
+    $(document).ready(function() {
+    newErrorMessage = function(wtf) {
+        // TODO: if wtf is an XHR, obtain text from it
+        $('<div>').html($(wtf).load(function(){
+        var elem = this;
+        })).appendTo($('#errMsg'));
+        var elem = $('#errMsg').find('p').last().show('slow');
+        setTimeout(function(){elem.hide('slow');}, 3000);
+    }
+        $('#newMsg').click(function() {
+            //newErrorMessage($('#newMsgText').val())
+            $.get('http://localhost:3000/tst', {}, function(data){
+                console.log(data);
+                newErrorMessage(data);
+            })
+        })
+    })
+  p Hello
+  input#newMsg(type='button' value='Create error message')
+  #errMsg
+  
